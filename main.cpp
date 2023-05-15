@@ -5,18 +5,18 @@
 #include <SDL2/SDL_image.h>
 
 using namespace std;
-
+// Random number generator
 float random(float low, float high){
 	return low + static_cast<float>(rand()) * static_cast<float>(high - low) / RAND_MAX;
 }
-
+// Window creation
 SDL_Window *win = SDL_CreateWindow("Pluto Uranus | Abthahi & Programming", 10,10,700,600, 0);
-
+// Render Creation
 SDL_Renderer *ren = SDL_CreateRenderer(win, -1, 0);
-
+// Event object declaring
 SDL_Event event;
 
-
+// Function to draw circle
 void drawCircle(int size, int x, int y){
     float px = x + size * cos(0);
     float py = y + size * sin(0);    
@@ -32,19 +32,14 @@ void drawCircle(int size, int x, int y){
         py = y + size * sin(i);  
     }
 }
-
+// Function to draw Planet and return the position of planet
 vector<float> drawPlanet(float x, float y, int orbitRadius, float deg){
-    
-    
-    
     float a = x + orbitRadius * cos(deg);
     float b = y + orbitRadius * sin(deg);
-    
     drawCircle(10, a, b);
-    
     return {a, b};
 }
-
+// Class for the lines
 class Line{
     
 private : 
@@ -62,10 +57,8 @@ public :
     
 };
 
-
-
 int main(int argc, char *argv[]){
-    
+    // Set Blend mode of Graphics
     SDL_SetRenderDrawBlendMode(ren, SDL_BLENDMODE_BLEND);
     
     bool isRunning = true;
@@ -75,6 +68,7 @@ int main(int argc, char *argv[]){
     vector<Line> lines;
     
     int t = 0;
+	
     while (isRunning){
         SDL_SetRenderDrawColor(ren, 0,0,0,255);
         SDL_RenderClear(ren);
